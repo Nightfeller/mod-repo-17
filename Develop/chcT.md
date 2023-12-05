@@ -180,6 +180,8 @@ Look-aheads check the character after it's **activation character**. In the exam
 
 Look-behinds check the character before it's activation character. In the example, `/^(?<=a)r$/`, the activation character is `e`, and if the previous character is `a`, the look-behind confirms it. This can also suffer from the same problems as look-ahead, with the line `/^b(?<=o)d/` being unable to match `somebody` desipte it seeming to work in theory.
 
+Look-arounds can be inversed by using an exclamation mark (`!`) instead of an equals sign (`=`). Like mentioned, an inversed look-around is the same as a negative look-around. An example of a negative look-ahead is `/^w(?!i)$/`, and an example of a negative look-behind is `/^(?<!h)i$/`.
+
 ## Author
 
 A short section about the author with a link to the author's GitHub profile (replace with your information and a link to your profile)
