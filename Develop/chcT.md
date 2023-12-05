@@ -164,18 +164,24 @@ Anything from here will be optional and not necessary to know most of the basics
 
 ### Boundaries
 
-l
+Boundaries are anchors, similar to `^` and `$`, but is also a character class, similar to `\d` and `\U`, and can be used with the two original anchors to search for whole words (or more specifically, alphanumeric sequences). A boundary is made using the line `\b`, and an example of this is `/^ab+\bword\bs?$/`, which will confirm matches like `abword`, `abbwords`, and `abbbbword`, but reject matches like `abwards` and `akward`.
+
+Like how in [character classes](#character-classes), capitalizing the letter in a boundry (like `\B`) will inverse it. An example of this would be `/^[sa-f]+\Btier\B[\+-]$/i`, which confirms `sa+`, `b-`, and `F`, but rejects `Stier`, `etier`, and `Btier`.
 
 ### Back-references
 
-l
+Back-references are ways to get data from [captured groups](#grouping-and-capturing) by using a backslash and a number that isn't zero (`\1`, `\2`, ... `\n`). This data is the text that was matched from the previous group, allowing the same text to be matched by different group, giving different (but possibly similar) results in the process. An example of this would be `/\b([a-z]+)\s+\1\b/i`, which would confirm duplicates like `why why`, `Bee bee`, or `asong asong`, but reject typos like `umbral umbrel`, `layout layput`, or `wind wine`.
 
 ### Look-ahead and Look-behind
 
-l
+Look-aheads and Look-behinds are zero-length assertions that check the character ahead or behind respectively, and are collectively known as look-arounds. A look-ahead is written as `x(?=y)` and a look-behind is written as `(?<=x)y`.
+
+Look-aheads check the character after it's **activation character**. In the example, `/^d(?=e)$/`, the activation character is `d`, and if the character afterwards is `e`, the look-ahead confirms it. However, look-aheads are somewhat janky with how they confirm and reject, as the line `/^q(?=u)i$/` cannot match `quit` despite it seeming to work in theory. There types of problems might lead to a rejected pattern, despite the look-ahead confirming a match.
+
+Look-behinds check the character before it's activation character. In the example, `/^(?<=a)r$/`, the activation character is `e`, and if the previous character is `a`, the look-behind confirms it. This can also suffer from the same problems as look-ahead, with the line `/^b(?<=o)d/` being unable to match `somebody` desipte it seeming to work in theory.
 
 ## Author
 
 A short section about the author with a link to the author's GitHub profile (replace with your information and a link to your profile)
 
-I am Matthew Earls, the writer of this tutorial (even though it could be argued to be an article). This was an interesting experience writing this, but I hope you, the reader, enjoyed this to at least a slight degree (I have low expectations for many things). If a link to my GitHub profile in needed, [here it is.](https://github.com/Nightfeller).
+I am Matthew Earls, the writer of this tutorial (even though it could be argued to be an article). This was an interesting experience writing this, but I hope you, the reader, enjoyed this at least. [Here's a link](https://github.com/Nightfeller) to my GitHub profile if it's interesting.
